@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm
+from .forms import CreateUserForm, loginForm
 
 # Create your views here.
 def registerPage(request):
@@ -11,6 +11,7 @@ def registerPage(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('/login')
 
 
 
@@ -18,4 +19,8 @@ def registerPage(request):
     return render(request, "register.html",context)
 
 def loginPage(request):
-    return render(request, "login.html")
+    form = loginForm()
+    context = {'form':form}
+
+
+    return render(request, "login.html",context = {'form':form})
