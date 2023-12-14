@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "createapplication",
     "userAuth",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -56,7 +57,7 @@ ROOT_URLCONF = "jobapplicationtracker.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ['templates','userAuth/templates'],
+        "DIRS": ['templates','userAuth/templates','createapplication/templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
