@@ -13,7 +13,7 @@ def createJobApplication(request):
     context = {'form':form}
     if request.method == "POST":
         form = createJobApplicationData(request.POST)
-        print (form.errors)
+        
         if form.is_valid():
             job_application = form.save(commit=False)
             job_application.userID = request.user
@@ -21,11 +21,13 @@ def createJobApplication(request):
             messages.success(request,'Job Application Added')
             return redirect('display')
         else:
+            messages.success(request, form.errors)
             messages.success(request, 'Failed to Add Application')
 
     return render(request,'createApplication.html',context)
 
 
+@login_required
 def displayApplications(request):
     
     return render(request,'displayApplications.html')
