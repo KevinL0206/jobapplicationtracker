@@ -42,4 +42,7 @@ def loginUser(request):
     
 def home(request):
 
-    return render(request,'home.html')
+    user = request.user
+    context = {'user':user}
+
+    return render(request,'home.html',context)
