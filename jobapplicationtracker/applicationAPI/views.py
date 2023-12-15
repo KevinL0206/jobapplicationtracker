@@ -31,7 +31,7 @@ def editApplication(request):
 
     form = editJobApplicationData()
     currentUser = request.user
-    query = jobApplication.objects.all().filter(userID = currentUser).order_by('-jobDeadline')
+    query = jobApplication.objects.all().filter(userID = currentUser).order_by('applicationID')
     userApplications = jobApplication.objects.filter(userID=currentUser)
     applicationIDs = [app.applicationID for app in userApplications]
     context = {
@@ -69,7 +69,7 @@ def displayApplications(request):
 
     currentUser = request.user
 
-    query = jobApplication.objects.all().filter(userID = currentUser).order_by('-jobDeadline')
+    query = jobApplication.objects.all().filter(userID = currentUser).order_by('applicationID')
     context = {'query': query}
     print(context)
     
