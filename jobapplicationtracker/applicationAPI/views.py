@@ -29,5 +29,11 @@ def createJobApplication(request):
 
 @login_required
 def displayApplications(request):
+
+    currentUser = request.user
+
+    query = jobApplication.objects.all().filter(userID = currentUser).order_by('-jobDeadline')
+    context = {'query': query}
+    print(context)
     
-    return render(request,'displayApplications.html')
+    return render(request,'displayApplications.html',context)
