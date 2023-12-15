@@ -18,7 +18,7 @@ def createJobApplication(request):
             job_application = form.save(commit=False)
             job_application.userID = request.user
             job_application.save()
-            messages.success(request,'Job Application Added')
+            
             return redirect('display')
         else:
             messages.success(request, form.errors)
