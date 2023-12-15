@@ -6,11 +6,11 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Login</h1>
 
     <form method="POST">
-        <h1>Login</h1>
-            {% csrf_token %}
-            {{form.as_p}}
+        {% csrf_token %}
+        {{form.as_p}}
 
         <input type="submit" name="Log in User">
     
