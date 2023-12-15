@@ -1,15 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from userAuth.models import jobApplication
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .forms import createJobApplicationData
+from .forms import createJobApplicationData, editJobApplicationData
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 # Create your views here.
 
 @login_required
 def createJobApplication(request):
     form = createJobApplicationData()
-    #form.fields['userID'].initial = request.user
     context = {'form':form}
     if request.method == "POST":
         form = createJobApplicationData(request.POST)
@@ -25,6 +25,43 @@ def createJobApplication(request):
             messages.success(request, 'Failed to Add Application')
 
     return render(request,'createApplication.html',context)
+
+@login_required
+def editApplication(request):
+
+    form = editJobApplicationData()
+    currentUser = request.user
+    query = jobApplication.objects.all().filter(userID = currentUser).order_by('-jobDeadline')
+    userApplications = jobApplication.objects.filter(userID=currentUser)
+    applicationIDs = [app.applicationID for app in userApplications]
+    context = {
+        'form':form,
+        'applicationIDs': applicationIDs,
+        'query': query
+    }
+
+    if request.method == "POST":
+        data = request.POST.copy()
+        applicationID= data.pop('application_id',None)
+        form = editJobApplicationData(data)
+        
+
+        if form.is_valid():
+            application = get_object_or_404(jobApplication,applicationID=int(applicationID[0]))
+            for field_name, value in form.cleaned_data.items():
+
+                if value is not None:
+                    setattr(application, field_name, value)
+
+            application.save()
+            return redirect('display')
+        
+        else:
+            return JsonResponse({'error': form.errors}, status=400)
+
+
+    
+    return render(request, 'editApplication.html',context)
 
 
 @login_required

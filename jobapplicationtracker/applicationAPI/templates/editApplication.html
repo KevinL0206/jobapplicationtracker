@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Applications</title>
+    <title>Document</title>
 </head>
 <body>
-    <h1>Applications</h1>
+    <h1>Edit Application</h1>
 
-    
     <table class="table" border="1" width="80%" height="100%">
         <thead>
             <tr>
@@ -36,25 +35,32 @@
             {% endfor %}
             </tbody>
     </table>
-    
+
     <br>
 
-    <button><a href="/editApplication">Edit Applications</a></button>
-    
+    <form method="POST">
+        {% csrf_token %}
 
-    <!--
-    {% for application in query %}
+        <label for="application_id">Select Application ID:</label>
+        <select name="application_id" id="application_id">
+            {% for id in applicationIDs %}
+            <option value="{{ id }}">{{ id }}</option>
+            {% endfor %}
+        </select>
 
-        <u><b>Application {{ forloop.counter }}:</b></u>
-        <p><b>Company Name:</b> {{application.companyName}}</p>
-        <p><b>Status:</b> {{application.status}}</p>
-        <p><b>Application Deadline:</b> {{application.jobDeadline}}</p>
-        <p><b>Date Applied:</b> {{application.applicationDate}}</p>
-        <p><b>Job Description:</b> {{application.jobDescription}}</p>
+        {%for field in form%}
+        
+            
+            <p>{{field.label}}: {{field}}</p>
+        
+        {% endfor %}
 
-        <br>
+        {{form.errors}}
+        <input type="submit" name="Edit Application">
+    </form>
 
-    {% endfor %}
-    -->
+    <br>
+
+    <button><a href="/applications">Applications</a></button>
 </body>
 </html>
