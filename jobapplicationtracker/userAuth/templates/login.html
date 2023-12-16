@@ -14,13 +14,15 @@
 
         <input type="submit" name="Log in User">
     
-        {% if messages %}
-            {% for message in messages%}
-                <p>{{message}}</p>
-            {% endfor %}
-        {% endif %}
+        
     </form> 
 
     <button><a href="/register">Sign Up</a></button>
+
+    {% if messages %}
+        {% for message in messages%}
+            <p>{{message}}</p>
+        {% endfor %}
+    {% endif %}
 </body>
 </html>
