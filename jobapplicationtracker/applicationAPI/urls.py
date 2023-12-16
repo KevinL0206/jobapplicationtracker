@@ -5,6 +5,6 @@ urlpatterns = [
     
     path('applications/', views.displayApplications,name = 'display'),
     path('createApplication/', views.createJobApplication, name= 'create'),
-    path('editApplication',views.editApplication, name= 'edit')
-    
+    path('editApplication',views.editApplication, name= 'edit'),
+    path('deleteApplication',views.deleteApplication, name = 'delete')
 ]

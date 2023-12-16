@@ -14,7 +14,7 @@
         <tbody>
         {% for application in query %}
         <tr>
-            <th scope="row">{{ forloop.counter }}</th>
+            <td align="center">{{application.applicationID}}</td>
             <td align="center">{{application.companyName}}</td>
             <td align="center">{{application.status}}</td>
             <td align="center">{{application.applicationDate}}</td>

@@ -43,3 +43,4 @@ class editJobApplicationData(createJobApplicationData):
         for field_name, field in self.fields.items():
             field.required = False
             field.empty_value = None
+

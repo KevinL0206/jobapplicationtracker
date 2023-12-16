@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Delete Application</title>
 </head>
 <body>
-    <h1>Edit Application</h1>
-
+    
     {% include 'partials/table.html' %}
 
     <br>
+
+    <h2>Select Application to Delete</h2>
 
     <form method="POST">
         {% csrf_token %}
@@ -22,13 +23,6 @@
             {% endfor %}
         </select>
 
-        {%for field in form%}
-        
-            
-            <p>{{field.label}}: {{field}}</p>
-        
-        {% endfor %}
-
         {{form.errors}}
         <input type="submit" name="Edit Application">
     </form>
@@ -37,10 +31,18 @@
 
     <button><a href="/applications">Applications</a></button>
     <button><a href="/createApplication">Create Applications</a></button>
-    <button><a href="/deleteApplication">Delete Applications</a></button>
-
+    <button><a href="/editApplication">Edit Applications</a></button>
     <br>
 
     <button><a href="/logout">Log Out</a></button>
+
+
+    {% if messages %}
+        {% for message in messages%}
+            <p>{{message}}</p>
+        {% endfor %}
+    {% endif %}
+
+
 </body>
 </html>

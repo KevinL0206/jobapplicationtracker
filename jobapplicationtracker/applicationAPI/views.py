@@ -64,6 +64,29 @@ def editApplication(request):
     
     return render(request, 'editApplication.html',context)
 
+def deleteApplication(request):
+    currentUser = request.user
+    query = jobApplication.objects.all().filter(userID = currentUser).order_by('applicationID')
+    userApplications = jobApplication.objects.filter(userID=currentUser)
+    applicationIDs = [app.applicationID for app in userApplications]
+    context = {
+        'applicationIDs': applicationIDs,
+        'query': query
+    }
+
+    if request.method == "POST":
+        data = request.POST.copy()
+        applicationID= data.pop('application_id',None)
+
+        if applicationID:
+            row = jobApplication.objects.get(applicationID = int(applicationID[0]))
+            row.delete()
+            return redirect('display')
+        else:
+            messages.success(request, 'No Application Selected')
+
+    return render(request, 'deleteApplication.html',context)
+
 
 @login_required
 def displayApplications(request):
