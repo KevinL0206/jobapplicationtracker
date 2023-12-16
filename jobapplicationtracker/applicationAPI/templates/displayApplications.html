@@ -9,52 +9,12 @@
     <h1>Applications</h1>
 
     
-    <table class="table" border="1" width="80%" height="100%">
-        <thead>
-            <tr>
-                <th scope="col">Application</th>
-                <th scope="col">Company Name</th>
-                <th scope="col">Status</th>
-                <th scope="col">Date Applied</th>
-                <th scope="col">Application Deadline</th>
-                <th scope="col">Location</th>
-                <th scope="col">Job Description</th>
-            </tr>
-            </thead>
-
-            <tbody>
-            {% for application in query %}
-            <tr>
-                <th scope="row">{{ forloop.counter }}</th>
-                <td align="center">{{application.companyName}}</td>
-                <td align="center">{{application.status}}</td>
-                <td align="center">{{application.applicationDate}}</td>
-                <td align="center">{{application.jobDeadline}}</td>
-                <td align="center">{{application.jobLocation}}</td>
-                <td align="center">{{application.jobDescription}}</td>
-            </tr>
-            {% endfor %}
-            </tbody>
-    </table>
+    {% include 'partials/table.html' %}
     
     <br>
 
     <button><a href="/editApplication">Edit Applications</a></button>
     
 
-    <!--
-    {% for application in query %}
-
-        <u><b>Application {{ forloop.counter }}:</b></u>
-        <p><b>Company Name:</b> {{application.companyName}}</p>
-        <p><b>Status:</b> {{application.status}}</p>
-        <p><b>Application Deadline:</b> {{application.jobDeadline}}</p>
-        <p><b>Date Applied:</b> {{application.applicationDate}}</p>
-        <p><b>Job Description:</b> {{application.jobDescription}}</p>
-
-        <br>
-
-    {% endfor %}
-    -->
 </body>
 </html>

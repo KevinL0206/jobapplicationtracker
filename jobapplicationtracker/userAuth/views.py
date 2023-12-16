@@ -43,6 +43,11 @@ def loginUser(request):
     else:
         return render(request,'login.html',context)
     
+def logoutUser(request):
+    logout(request)
+    messages.success(request, 'You Were Logged Out')
+    return redirect('login')
+    
 def home(request):
 
     user = request.user
